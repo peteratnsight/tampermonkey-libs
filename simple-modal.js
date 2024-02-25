@@ -88,7 +88,6 @@ const createModal = (name, header, fieldArray) => {
             input.appendChild(option);
           });
           break;
-    break;
         case "textarea":
           input.rows = "5";
           input.value = getKeyValue(key);
