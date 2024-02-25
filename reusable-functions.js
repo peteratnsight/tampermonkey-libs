@@ -28,7 +28,7 @@ const addPill = (funct,btnText,runtimeConfig) => {
   if(runtimeConfig != undefined) initConfig(runtimeConfig);
   let pill = document.createElement("button");
   pill.textContent = btnText;
-  pill.classList.add(...getConfigValue(pillClasses));
+  pill.classList.add(...getConfigValue('pillClasses'));
   pill = executeStylesOnElement('pillStyles',pill);
   pill.addEventListener('click', () => funct())
   return pill
