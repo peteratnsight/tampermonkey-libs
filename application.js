@@ -6,7 +6,7 @@ class TMApplication {
   }
 
   sayHello() {
-    console.log(`Hello World`);
+    console.log(`Hello World - This is the TM Application running and cheering.`);
   }
 
   getConfig() {
