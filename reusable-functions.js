@@ -6,7 +6,10 @@ const reusableFunctionsConfig = {
 }
 
 const initConfig = runtimeConfig => {
-  reusableFunctionsConfig = Object.assign({}, reusableFunctionsConfig, runtimeConfig);
+  let initializedConfig = Object.assign({}, reusableFunctionsConfig, runtimeConfig);
+  for (const [key, value] of Object.entries(initializedConfig)) {
+        reusableFunctionsConfig[key] = value;
+  }
 }
 
 const getConfigValue = key => {
