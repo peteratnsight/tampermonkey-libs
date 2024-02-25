@@ -37,7 +37,7 @@ class TMApplication {
     this.defaultConfig = Object.assign({}, this.defaultConfig, runtimeConfig);
   }
 
-  init(runtimeConfig) {
+  static init(runtimeConfig) {
     console.log('Init wurde aufgerufen');
   }
 
@@ -58,13 +58,18 @@ class TMApplication {
   }
   initilizeApplicationButtons(buttons) { return true; }
 
-  getButton(funct,btnText,runtimeConfig) {
-    if(runtimeConfig != undefined) this.initRuntimeConfig(runtimeConfig);
+  getButton(funct, btnText, runtimeConfig) {
+    if (runtimeConfig != undefined) {
+      this.initRuntimeConfig(runtimeConfig);
+    }
     let pill = document.createElement("button");
     pill.textContent = btnText;
     pill.classList.add(...this.getConfigValue('pillClasses'));
-    pill = this.executeStylesOnElement('pillStyles',pill);
-    pill.addEventListener('click', () => funct());
+    pill = this.executeStylesOnElement('pillStyles', pill);
+    if (typeof funct === 'function') {
+      pill.addEventListener('click', funct);
+    }
     return pill;
   }
+
 }
