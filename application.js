@@ -38,6 +38,10 @@ class TMApplication {
   }
 
   init(document, runtimeConfig) {
+    console.log('Init wurde aufgerufen');
+  }
+
+  dummy() {
     this.set("document",document);
     this.initRuntimeConfig(runtimeConfig);
     this.initSetup();
