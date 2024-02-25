@@ -21,8 +21,8 @@ const downloadCsv = (csvUrl, filename) => {
   downloadLink.click();
   document.body.removeChild(downloadLink); // Entfernen Sie das Element nach dem Download
 }
-const download = () => {
-    const dataMap = TMA.getStorage();
+const download = (storageName) => {
+    const dataMap = TMA.getStorage(storageName);
     if(dataMap == undefined || dataMap === false) return false;
     // Konvertieren Sie die Map-Daten in CSV
     const csvContent = mapToCsv(dataMap);
