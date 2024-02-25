@@ -41,6 +41,7 @@ class TMApplication {
     initSetup();
     initializeConfigButtton();
     if(this.defaultConfig.buttons != undefined && this.defaultConfig.buttons.length != 0) initilizeApplicationButtons(this.defaultConfig.buttons);
+    sayHello();
   }
 
   initSetup() { return true; }
