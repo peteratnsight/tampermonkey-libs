@@ -117,12 +117,14 @@ const __getKeyValue = (key,funct) => {
 const getModal = (name) => {
   let modalName = name + modalConfig.wrapperAppendix;
   let foundElems = document.querySelectorAll('#' + modalName);
+  console.log(foundElems);
   if(foundElems.length == 0) return false;
   return foundElems[0];
 }
 
 const showModal = (name) => {
   let modalElement = getModal(name);
+  console.log(modalElement);
   if(modalElement == undefined) return false;
   modalElement.style.display = 'flex';
   modalElement.style.zIndex = '1000';
