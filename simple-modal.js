@@ -23,7 +23,10 @@ const modalConfig = {
 }
 
 const initModal = runtimeConfig => {
-  modalConfig = Object.assign({}, modalConfig, runtimeConfig);
+  let initializedConfig = Object.assign({}, modalConfig, runtimeConfig);
+  for (const [key, value] of Object.entries(initializedConfig)) {
+        modalConfig[key] = value;
+  }
 }
 
 const styleElementByConfig = (configStylesName, element) => {
