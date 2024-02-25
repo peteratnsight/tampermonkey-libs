@@ -116,11 +116,14 @@ const __getKeyValue = (key,funct) => {
 
 const getModal = (name) => {
   let modalName = name + modalConfig.wrapperAppendix;
-  return document.getElementById(modalName);
+  let foundElems = document.querySelectorAll('#' + modalName);
+  if(foundElems.length == 0) return false;
+  return foundElems[0];
 }
 
 const showModal = (name) => {
   let modalElement = getModal(name);
+  if(modalElement == undefined) return false;
   modalElement.style.display = 'flex';
   modalElement.style.zIndex = '1000';
 }
