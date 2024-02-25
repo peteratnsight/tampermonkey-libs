@@ -22,6 +22,8 @@ const modalConfig = {
   wrapperAppendix: '-wrapper'
 }
 
+const delayRun = ms => new Promise(res => setTimeout(res, ms))
+
 const initModal = runtimeConfig => {
   let initializedConfig = Object.assign({}, modalConfig, runtimeConfig);
   for (const [key, value] of Object.entries(initializedConfig)) {
@@ -116,6 +118,7 @@ const __getKeyValue = (key,funct) => {
 
 const getModal = (name) => {
   let modalName = name + modalConfig.wrapperAppendix;
+  console.log(modalName);
   let foundElems = document.querySelectorAll('#' + modalName);
   console.log(foundElems);
   if(foundElems.length == 0) return false;
