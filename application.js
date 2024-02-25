@@ -1,4 +1,4 @@
-class APP {
+class TMApplication {
   constructor(config) {
     this.name = 'TM Application';
     this.version = '1.0';
