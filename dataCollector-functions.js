@@ -33,3 +33,14 @@ const download = () => {
     // Laden Sie die CSV-Datei herunter
     downloadCsv(csvUrl, "dataExport.csv");
 }
+const clearStorage = () => { TMA.clearStorage(); }
+const manageListMeta = () => {
+    let listIdentifier = TMA.getStorageName();
+    const listNames = TMA.getStorage(TMA.getConfigValue("listCollectorName"));
+    let listNameDefined = listNames.get(listIdentifier);
+    if(listNameDefined == undefined || listNameDefined === false) listNameDefined = "Suche nach " + TMA.getKeywords();
+    let listName = prompt("Bitte geben Sie einen Bezeichner für diese Liste ein:", listNameDefined);
+    alert(listName + "::" + listIdentifier);
+    //listCollectorName
+    TMA.addItemToStorage(listIdentifier,listName,TMA.getConfigValue("listCollectorName"));
+}
