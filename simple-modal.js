@@ -27,7 +27,13 @@ const delayRun = ms => new Promise(res => setTimeout(res, ms))
 const initModal = runtimeConfig => {
   let initializedConfig = Object.assign({}, modalConfig, runtimeConfig);
   for (const [key, value] of Object.entries(initializedConfig)) {
-        modalConfig[key] = value;
+    if (typeof value === "object" && value !== null) {
+      for (const [subkey, subvalue] of Object.entries(value)) {
+        modalConfig[key][subkey] = subvalue;
+      }
+    } else {
+      modalConfig[key] = value;
+    }
   }
 }
 
@@ -35,13 +41,7 @@ const styleElementByConfig = (configStylesName, element) => {
   let thisConfiguration = modalConfig[configStylesName];
   if(thisConfiguration == undefined) return element;
   for (const [key, value] of Object.entries(thisConfiguration)) {
-    if (typeof value === "object" && value !== null) {
-      for (const [subkey, subvalue] of Object.entries(value)) {
-        element.style[key][subkey] = subvalue;
-      }
-    } else {
-      element.style[key] = value;
-    }
+    element.style[key] = value;
   }
   return element;
 }
