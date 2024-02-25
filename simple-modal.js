@@ -74,12 +74,29 @@ const createModal = (name, header, fieldArray) => {
       inputLabel.textContent = key.toUpperCase();
       let fieldtype = "input";
       if(value == "textarea") fieldtype = "textarea";
+      if(value == "select") fieldtype = "select";
       const input = document.createElement(fieldtype);
-      input.type = value;
-      if(value == "textarea") input.rows = "5";
       input.id = key;
       input.name = key;
-      input.value = getKeyValue(key);
+      switch (fieldtype) {
+        case "select":
+          options = getKeyValue(key);
+          options.forEach(optionData => {
+            const option = document.createElement("option");
+            option.text = optionData.text;
+            option.value = optionData.value;
+            input.appendChild(option);
+          });
+          break;
+    break;
+        case "textarea":
+          input.rows = "5";
+          input.value = getKeyValue(key);
+          break;
+        default:
+          input.type = value;
+          input.value = getKeyValue(key);
+      }
       field.appendChild(inputLabel);
       field.appendChild(input);
       dataForm.appendChild(field);
