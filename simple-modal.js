@@ -71,7 +71,7 @@ const createModal = (name, header, fieldArray) => {
       if(value == "textarea") input.rows = "5";
       input.id = key;
       input.name = key;
-      input.value = getDefaultValueFromConstant(key);
+      input.value = getKeyValue(key);
       field.appendChild(inputLabel);
       field.appendChild(input);
       dataForm.appendChild(field);
@@ -105,7 +105,10 @@ const createModal = (name, header, fieldArray) => {
   document.body.appendChild(modal);
 }
 
-const getKeyValue = key => {
+const __getKeyValue = (key,funct) => {
+  let keyFunction = key + "ConfigFunct";
+  if(typeof modalConfig[keyFunction] === 'function') return modalConfig[keyFunction](key);
+  if(funct != undefined && typeof funct === 'function') return funct(key);
   if(hasStorage != undefined && getFromStorage(key) !== false) return getFromStorage(key);
   if(config != undefined && config[key] != undefined && getConfigKey(key) !== false) return getConfigKey(key);
   return "";
