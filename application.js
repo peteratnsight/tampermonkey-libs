@@ -1,7 +1,8 @@
 class TMApplication {
   const defaultConfig = {
     buttons: {},
-    pillClasses: []
+    pillClasses: ["artdeco-button","artdeco-button--primary"],
+    pillStyles: {}
   }
   constructor(config) {
     this.name = 'TM Application';
@@ -36,16 +37,22 @@ class TMApplication {
     this.defaultConfig = Object.assign({}, this.defaultConfig, runtimeConfig);
   }
 
-  init(runtimeConfig) {
-    initRuntimeConfig(runtimeConfig);
-    initSetup();
-    initializeConfigButtton();
-    if(this.defaultConfig.buttons != undefined && this.defaultConfig.buttons.length != 0) initilizeApplicationButtons(this.defaultConfig.buttons);
-    sayHello();
+  init(document, runtimeConfig) {
+    this.set("document",document);
+    this.initRuntimeConfig(runtimeConfig);
+    this.initSetup();
+    this.initializeConfigButtton();
+    if(this.defaultConfig.buttons != undefined && this.defaultConfig.buttons.length != 0) this.initilizeApplicationButtons(this.defaultConfig.buttons);
+    this.sayHello();
   }
 
   initSetup() { return true; }
-  initializeConfigButtton() { return true; }
+  
+  initializeConfigButtton() { 
+    let configPill = this.getButton(this.callConfiguration,"Configuration");
+    this.document.body.appendChild(configPill);
+    return true; 
+  }
   initilizeApplicationButtons(buttons) { return true; }
 
   getButton(funct,btnText,runtimeConfig) {
