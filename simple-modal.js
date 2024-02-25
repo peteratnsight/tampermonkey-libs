@@ -35,7 +35,13 @@ const styleElementByConfig = (configStylesName, element) => {
   let thisConfiguration = modalConfig[configStylesName];
   if(thisConfiguration == undefined) return element;
   for (const [key, value] of Object.entries(thisConfiguration)) {
-    element.style[key] = value;
+    if (typeof value === "object" && value !== null) {
+      for (const [subkey, subvalue] of Object.entries(value)) {
+        element.style[key][subkey] = subvalue;
+      }
+    } else {
+      element.style[key] = value;
+    }
   }
   return element;
 }
@@ -125,12 +131,16 @@ const getModal = (name) => {
   return foundElems[0];
 }
 
-const showModal = (name) => {
+const showModal = (name,styles) => {
   let modalElement = getModal(name);
-  console.log(modalElement);
   if(modalElement == undefined) return false;
   modalElement.style.display = 'flex';
   modalElement.style.zIndex = '1000';
+  if(styles != undefined) {
+    for (const [key, value] of Object.entries(styles)) {
+      modalElement.style[key] = value;
+    }
+  }
 }
 
 const closeModal = (name) => {
