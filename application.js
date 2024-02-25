@@ -1,13 +1,13 @@
 class TMApplication {
-  const defaultConfig = {
-    buttons: {},
-    pillClasses: ["artdeco-button","artdeco-button--primary"],
-    pillStyles: {}
-  }
   constructor(config) {
     this.name = 'TM Application';
     this.version = '1.0';
-    this.defaultConfig = config;
+    this.defaultConfig = {
+      buttons: {},
+      pillClasses: ["artdeco-button", "artdeco-button--primary"],
+      pillStyles: {},
+      ...config // Überschreiben/Erweitern der Standardkonfiguration mit dem übergebenen Konfigurationsobjekt
+    };
   }
 
   sayHello() {
@@ -15,7 +15,7 @@ class TMApplication {
   }
 
   getConfig() {
-    return this.config;
+    return this.defaultConfig;
   }
   
   getConfigValue(key) {
@@ -37,12 +37,11 @@ class TMApplication {
     this.defaultConfig = Object.assign({}, this.defaultConfig, runtimeConfig);
   }
 
-  init(document, runtimeConfig) {
+  init(runtimeConfig) {
     console.log('Init wurde aufgerufen');
   }
 
   dummy() {
-    this.set("document",document);
     this.initRuntimeConfig(runtimeConfig);
     this.initSetup();
     this.initializeConfigButtton();
@@ -54,17 +53,17 @@ class TMApplication {
   
   initializeConfigButtton() { 
     let configPill = this.getButton(this.callConfiguration,"Configuration");
-    this.document.body.appendChild(configPill);
+    document.body.appendChild(configPill);
     return true; 
   }
   initilizeApplicationButtons(buttons) { return true; }
 
   getButton(funct,btnText,runtimeConfig) {
-    if(runtimeConfig != undefined) initRuntimeConfig(runtimeConfig);
+    if(runtimeConfig != undefined) this.initRuntimeConfig(runtimeConfig);
     let pill = document.createElement("button");
     pill.textContent = btnText;
-    pill.classList.add(...getConfigValue('pillClasses'));
-    pill = executeStylesOnElement('pillStyles',pill);
+    pill.classList.add(...this.getConfigValue('pillClasses'));
+    pill = this.executeStylesOnElement('pillStyles',pill);
     pill.addEventListener('click', () => funct());
     return pill;
   }
