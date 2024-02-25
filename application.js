@@ -96,7 +96,6 @@ class TMApplication {
     this.initSetup();
     this.initializeConfigButtton();
     if(this.defaultConfig.buttons != undefined && Object.keys(this.defaultConfig.buttons).length != 0) { await this.initilizeApplicationButtons(this.defaultConfig.buttons); }
-    this.alertStorage();
   }
   initSetup() { console.log("initSetup Method to interfere in init/setup routine"); return true; }
   initializeConfigButtton() {
