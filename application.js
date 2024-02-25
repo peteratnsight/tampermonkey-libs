@@ -95,6 +95,7 @@ class TMApplication {
     let initializedConfig = Object.assign({}, this.defaultConfig, runtimeConfig);
     for (const [key, value] of Object.entries(initializedConfig)) {
       if (typeof value === "object" && value !== null) {
+        if(this.defaultConfig[key] == undefined || this.defaultConfig[key] === null) this.defaultConfig[key] = {};
         for (const [subkey, subvalue] of Object.entries(value)) {
           this.defaultConfig[key][subkey] = subvalue;
         }
