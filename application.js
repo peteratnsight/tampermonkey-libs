@@ -73,6 +73,11 @@ class TMApplication {
   getConfig() {
     return this.defaultConfig;
   }
+  clearConfigValue(key) {
+    if(this.defaultConfig[key] == undefined || this.defaultConfig[key] === false || this.defaultConfig[key] == '') return false;
+    if (typeof this.defaultConfig[key] === "object" && this.defaultConfig[key] !== null) return {};
+    return false;
+  }
   getConfigValue(key) {
     if(this.defaultConfig[key] == undefined || this.defaultConfig[key] === false) return '';
     return this.defaultConfig[key];
