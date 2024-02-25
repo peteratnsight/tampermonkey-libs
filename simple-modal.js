@@ -41,19 +41,19 @@ const styleElementByConfig = (configStylesName, element) => {
 // Modal UI Functions ....
 const createModal = (name, header, fieldArray) => {
   // Modal-Container erstellen
-  const modal = document.createElement('div');
+  let modal = document.createElement('div');
   modal.setAttribute('id', name + modalConfig.wrapperAppendix);
   modal = styleElementByConfig('wrapperStyles',modal);
   // Modal-Inhalt erstellen
-  const modalContent = document.createElement('div');
+  let modalContent = document.createElement('div');
   modalContent = styleElementByConfig('dialogStyles',modalContent);
-  const mheader = document.createElement('h2');
+  let mheader = document.createElement('h2');
   mheader.style.textAlign = "center";
   mheader.textContent = header;
   // Elemente zum Modal-Inhalt hinzufügen
   modalContent.appendChild(mheader);
   // Textfeld für die Variable
-  const dataForm = document.createElement('form');
+  let dataForm = document.createElement('form');
   dataForm.setAttribute('id', name + "Form");
   dataForm.setAttribute('method','post');
   dataForm.setAttribute('href', window.location.href);
@@ -77,7 +77,7 @@ const createModal = (name, header, fieldArray) => {
       dataForm.appendChild(field);
   };
   // Speichern-Button
-  const saveButton = document.createElement("input");
+  let saveButton = document.createElement("input");
   saveButton.classList.add('artdeco-pill','artdeco-pill--slate','artdeco-pill--choice','artdeco-pill--2','search-reusables__filter-pill-button');
   saveButton.textContent = 'Speichern';
   saveButton.role = "button";
@@ -86,7 +86,7 @@ const createModal = (name, header, fieldArray) => {
     e.preventDefault();
     saveInput(name,e.target);
   });
-  const closeButton = document.createElement("button");
+  let closeButton = document.createElement("button");
   closeButton.classList.add('artdeco-pill','artdeco-pill--slate','artdeco-pill--choice','artdeco-pill--2','search-reusables__filter-pill-button');
   closeButton.textContent = 'Schließen';
   closeButton.role = "button";
