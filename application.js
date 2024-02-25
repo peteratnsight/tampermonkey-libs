@@ -99,20 +99,6 @@ class TMApplication {
     }
     console.log(this.defaultConfig);
   }
-
-  let initializedConfig = Object.assign({}, modalConfig, runtimeConfig);
-  for (const [key, value] of Object.entries(initializedConfig)) {
-    if (typeof value === "object" && value !== null) {
-      for (const [subkey, subvalue] of Object.entries(value)) {
-        modalConfig[key][subkey] = subvalue;
-      }
-    } else {
-      modalConfig[key] = value;
-    }
-  }
-}
-
-  
   async init(runtimeConfig) {
     console.log('TMApplikcation::Init wurde aufgerufen');
     this.initRuntimeConfig(runtimeConfig);
