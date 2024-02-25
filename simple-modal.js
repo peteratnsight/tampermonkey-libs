@@ -1,26 +1,49 @@
+const modalConfig = {
+  wrapperStyles: {
+    display: 'none',
+    position: fixed,
+    width: '100%',
+    height: '100%',
+    left: '0',
+    top: '0',
+    background: 'rgba(0,0,0,.8)',
+    zIndex: '-1',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  dialogStyles: {
+    width: '70vw',
+    height: '90vh',
+    position: 'relative',
+    margin: 'auto',
+    backgroundColor: 'white',
+    padding: '20px',
+  },
+  wrapperAppendix: '-wrapper'
+}
+
+const initModal = runtimeConfig => {
+  modalConfig = Object.assign({}, modalConfig, runtimeConfig);
+}
+
+const styleElementByConfig = (configStylesName, element) => {
+  let thisConfiguration = modalConfig[configStylesName];
+  if(thisConfiguration == undefined) return element;
+  for (const [key, value] of Object.entries(thisConfiguration)) {
+    element.style[key] = value;
+  }
+  return element;
+}
+
 // Modal UI Functions ....
 const createModal = (name, header, fieldArray) => {
   // Modal-Container erstellen
   const modal = document.createElement('div');
-  modal.setAttribute('id', name + "-wrapper");
-  modal.style.display = 'none';
-  modal.style.position = 'fixed';
-  modal.style.width = '100%';
-  modal.style.height = '100%';
-  modal.style.left = '0';
-  modal.style.top = '0';
-  modal.style.background = 'rgba(0,0,0,.8)';
-  modal.style.zIndex = '-1';
-  modal.style.justifyContent = 'center';
-  modal.style.alignItems = 'center';
+  modal.setAttribute('id', name + modalConfig.wrapperAppendix);
+  modal = styleElementByConfig('wrapperStyles',modal);
   // Modal-Inhalt erstellen
   const modalContent = document.createElement('div');
-  modalContent.style.width = '70vw';
-  modalContent.style.height = '90vh';
-  modalContent.style.position = "relative";
-  modalContent.style.margin = 'auto';
-  modalContent.style.backgroundColor = 'white';
-  modalContent.style.padding = '20px';
+  modalContent = styleElementByConfig('dialogStyles',modalContent);
   const mheader = document.createElement('h2');
   mheader.style.textAlign = "center";
   mheader.textContent = header;
@@ -86,7 +109,7 @@ const getKeyValue = key => {
 }
 
 const getModal = (name) => {
-  let modalName = name + '-wrapper';
+  let modalName = name + modalConfig.wrapperAppendix;
   return document.getElementById(modalName);
 }
 
