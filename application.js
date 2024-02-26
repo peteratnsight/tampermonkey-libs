@@ -43,9 +43,10 @@ class TMApplication {
         ...config // Überschreiben/Erweitern der Standardkonfiguration mit dem übergebenen Konfigurationsobjekt
     };
   }
-  getRequest() {
-    let url = this.url;
-    let urlObject = new URL(this.url);
+  getRequest(inUrl) {
+    if(inUrl == undefined || inUrl === null) inUrl = this.url;
+    let url = inUrl;
+    let urlObject = new URL(inUrl);
     let queryParams = new URLSearchParams(urlObject.search);
     let query = Object.fromEntries(queryParams);
     let regex = /\/groups\/(\d+)/;
